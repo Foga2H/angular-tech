@@ -1,0 +1,28 @@
+<mat-card>
+    <h1>Edit article</h1>
+  
+    <form (ngSubmit)="onSave(articleForm)" #articleForm="ngForm">
+  
+      <mat-tab-group>
+  
+        <mat-tab *ngFor="let language of languages; let i = index" label="{{language.name}}">
+  
+            <mat-form-field>
+                <input id="title-{{i}}" required name="title_{{language.code}}" [(value)]="articles[language.code].title" matInput placeholder="Article title" [(ngModel)]="articles[language.code].title">
+            </mat-form-field>
+        
+            <mat-form-field>
+                <textarea [froalaEditor] required id="description-{{i}}" name="description_{{language.code}}" [(value)]="articles[language.code].description" matInput placeholder="Article description" [(ngModel)]="articles[language.code].description"></textarea>
+            </mat-form-field> 
+  
+        </mat-tab>
+  
+      </mat-tab-group>
+  
+      <div class="buttons-wrapper">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!articleForm.valid">Save</button>
+        <button mat-raised-button routerLink="/">Cancel</button>
+      </div>
+  
+    </form>
+  </mat-card>

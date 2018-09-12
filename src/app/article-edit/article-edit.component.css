@@ -1,0 +1,16 @@
+mat-form-field {
+    width: 100%;
+}
+
+textarea {
+    height: 200px;
+}
+
+.buttons-wrapper {
+    width: 100%;
+    text-align: right;
+}
+
+.buttons-wrapper button:not(:last-child) {
+    margin: 0 10px;
+}

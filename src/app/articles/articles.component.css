@@ -1,0 +1,47 @@
+.icon {
+    padding: 0 14px;
+    cursor: pointer;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+mat-card-tile {
+    max-height: 300px;
+    position: relative;
+    z-index: 1;
+}
+
+mat-card.article {
+    width: calc(100% - 70px);
+    height: calc(100% - 70px);
+    cursor: pointer;
+}
+
+mat-card.article:hover .edit-buttons {
+    display: block;
+}
+
+p {
+    height: 97px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.edit-buttons {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 15px;
+}
+
+.edit-buttons .icon {
+    padding: 0 8px;
+    position: relative;
+    z-index: 5;
+}
+
+h3:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>{{ title }}</span>
+        <span class="spacer"></span>
+        <button routerLink="/articles/create" mat-button>Add article</button>
+        <mat-form-field>
+            <mat-select placeholder="Language" [(value)]="selectedLanguageId">
+                <mat-option *ngFor="let language of languages" [value]="language.id" (click)="onLanguageSelect(language)">
+                    {{ language.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-card>
+
+  <mat-grid-list cols="3" rowHeight="200">
+
+    <mat-grid-tile *ngFor="let article of articles">
+      <mat-card class="article">
+        <div class="edit-buttons">
+            <mat-icon class="icon" routerLink="/articles/edit/{{ article.id }}">edit</mat-icon>
+            <mat-icon class="icon" (click)="deleteArticle(article)">clear</mat-icon>
+        </div>
+        <mat-card-content>
+            <h3 routerLink="/articles/{{ article.id }}">{{ article.content[languageService.getSelectedLanguage()].title }}</h3>
+            <p [innerHtml]="article.content[languageService.getSelectedLanguage()].description"></p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>  
+    
+  </mat-grid-list>
+</mat-card>
