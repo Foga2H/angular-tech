@@ -20,7 +20,6 @@ export class ArticlesComponent implements OnInit {
   breakpoint: number;
 
   constructor(
-    private storageService: LocalStorageService,
     private articleService: ArticleService,
     private languageService: LanguageService) {
       
