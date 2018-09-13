@@ -18,7 +18,7 @@ export class ArticleDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private articleService: ArticleService,
+    public articleService: ArticleService,
     private router: Router,
     private languageService: LanguageService
   ) {

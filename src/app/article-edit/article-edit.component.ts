@@ -19,7 +19,7 @@ export class ArticleEditComponent implements OnInit {
 
   constructor(
     private storageService: LocalStorageService,
-    private articleService: ArticleService,
+    public articleService: ArticleService,
     private languageService: LanguageService,
     private router: Router, 
     private route: ActivatedRoute) {
