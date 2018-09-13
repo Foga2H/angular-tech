@@ -1,41 +1,54 @@
 import { Inject, Injectable } from '@angular/core';
-import { LOCAL_STORAGE, StorageService } from 'angular-webstorage-service';
 
 import { Language } from '../models/language';
 import { LocalStorageService } from '../service/storage.service';
 
-const LANGUAGE_STORAGE_KEY = 'language_id';
-
 @Injectable()
 export class LanguageService {
     currentLanguage : number;
+    languages: Language[];
     
-    constructor(@Inject(LOCAL_STORAGE) private storage: StorageService, private storageService: LocalStorageService) {
+    constructor(private storageService: LocalStorageService) {
         this.currentLanguage = this.getSelectedLanguage();
+
+        this.languages = this.getLanguages();
+    }
+
+    public getLanguages(): Language[] {
+        const languages = this.storageService.getLanguagesFromLocalStorage();
+        
+        return languages;
     }
 
     public getSelectedLanguage(): number {
-        const language = this.storage.get(LANGUAGE_STORAGE_KEY) || null;
-
-        if(!language) {
-            this.storage.set(LANGUAGE_STORAGE_KEY, 0);
-
-            return 0;
-        }
+        const language = this.storageService.getLanguageIdFromLocalStorage();
 
         return language;
     }
 
-
     public changeLanguage(language : Language) {
-        const languages =  this.storageService.getLanguagesFromLocalStorage();
-
-        for(let i = 0; i < languages.length; i++) {
-            if(language.id == languages[i].id) {
-                this.storage.set(LANGUAGE_STORAGE_KEY, i);
+        this.languages.forEach((languageItem) => {
+            if(language.id == languageItem.id) {
+                this.storageService.storeLanguageOnLocalStorage(language);
                 
-                this.currentLanguage = i;
+                this.currentLanguage = this.getSelectedLanguage();
             }
-        }
+        });
+    }
+
+    public getLanguageById(id: number): Language {
+        const language = this.languages.find((language) => {
+            return language.id == id;
+        });
+
+        return language;
+    }
+
+    public getLanguageByCode(code: string): Language {
+        const language = this.languages.find((language) => {
+            return language.code == code;
+        });
+
+        return language;
     }
 }

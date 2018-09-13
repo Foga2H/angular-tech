@@ -3,6 +3,7 @@ import { Article } from '../models/article';
 import { LocalStorageService } from '../service/storage.service';
 import { LanguageService } from '../service/language.service';
 import { Language } from '../models/language';
+import { ArticleService } from '../service/article.service';
 
 @Component({
   selector: 'app-articles',
@@ -17,11 +18,14 @@ export class ArticlesComponent implements OnInit {
   languages: Language[];
   selectedLanguageId: number;
 
-  constructor(private storageService: LocalStorageService, private languageService: LanguageService) { 
-    this.getArticles();
-    
-    this.languages = storageService.getLanguagesFromLocalStorage();
-    this.selectedLanguageId = storageService.getLanguageIdByIndex(languageService.getSelectedLanguage());
+  constructor(
+    private storageService: LocalStorageService,
+    private articleService: ArticleService,
+    private languageService: LanguageService) {
+      
+    this.articles = this.articleService.getArticles();
+    this.languages = languageService.getLanguages();
+    this.selectedLanguageId = languageService.getSelectedLanguage();
   }
 
   ngOnInit() {
@@ -29,18 +33,12 @@ export class ArticlesComponent implements OnInit {
 
   onLanguageSelect(language : Language) {
     this.languageService.changeLanguage(language);
-
-    this.getArticles();
   }
 
   deleteArticle(article: Article) {
-    this.storageService.removeArticleFromLocalStorage(article);
+    this.articleService.removeArticle(article);
 
-    this.getArticles();
-  }
-
-  getArticles() : void {
-    this.articles = this.storageService.getArticlesFromLocalStorage();
+    this.articles = this.articleService.getArticles();
   }
 
 }

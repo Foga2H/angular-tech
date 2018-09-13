@@ -1,9 +1,9 @@
 <mat-card>
     <h1>Article view</h1>
 
-    <h3>{{ article.content[languageService.getSelectedLanguage()].title }}</h3>
+    <h3>{{ articleService.getArticleContentByLanguage(article.id, selectedLanguageId).title }}</h3>
 
-    <p [innerHtml]="article.content[languageService.getSelectedLanguage()].description"></p>
+    <p [innerHtml]="articleService.getArticleContentByLanguage(article.id, selectedLanguageId).description"></p>
 
   
 </mat-card>

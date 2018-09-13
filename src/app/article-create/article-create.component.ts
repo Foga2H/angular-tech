@@ -4,6 +4,8 @@ import { LocalStorageService } from '../service/storage.service';
 import { Language } from '../models/language';
 import { Article, ArticleContent } from '../models/article'
 import { Router } from '@angular/router';
+import { ArticleService } from '../service/article.service';
+import { LanguageService } from '../service/language.service';
 
 @Component({
   selector: 'app-article-create',
@@ -16,8 +18,13 @@ export class ArticleCreateComponent implements OnInit {
   articles : any = []; 
   languages : Language[]
 
-  constructor(public storageService : LocalStorageService, private router: Router) {
-    this.languages = this.storageService.getLanguagesFromLocalStorage();
+  constructor(
+    private storageService: LocalStorageService,
+    private articleService: ArticleService,
+    private languageService: LanguageService,
+    private router: Router) {
+      
+    this.languages = this.languageService.getLanguages();
   }
 
   ngOnInit() {
@@ -35,12 +42,12 @@ export class ArticleCreateComponent implements OnInit {
 
         content.description = this.articles[languageKey].description;
         content.title = this.articles[languageKey].title;
-        content.language_id = this.storageService.getLanguageByCode(languageKey) ? this.storageService.getLanguageByCode(languageKey).id : null;
+        content.language_id = this.languageService.getLanguageByCode(languageKey) ? this.languageService.getLanguageByCode(languageKey).id : null;
 
         article.content.push(content);
     }
 
-    this.storageService.storeArticleOnLocalStorage(article);
+    this.articleService.saveArticle(article);
 
     this.router.navigate(['/']);
   }

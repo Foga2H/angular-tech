@@ -15,6 +15,7 @@ import { ArticleCreateComponent } from './article-create/article-create.componen
 import { ArticleEditComponent } from './article-edit/article-edit.component';
 import { LocalStorageService } from './service/storage.service';
 import { LanguageService } from './service/language.service';
+import { ArticleService } from './service/article.service';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
@@ -38,7 +39,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     FroalaEditorModule.forRoot(), 
     FroalaViewModule.forRoot()
   ],
-  providers: [LocalStorageService, LanguageService],
+  providers: [LocalStorageService, LanguageService, ArticleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

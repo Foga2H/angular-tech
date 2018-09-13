@@ -23,8 +23,8 @@
             <mat-icon class="icon" (click)="deleteArticle(article)">clear</mat-icon>
         </div>
         <mat-card-content>
-            <h3 routerLink="/articles/{{ article.id }}">{{ article.content[languageService.getSelectedLanguage()].title }}</h3>
-            <p [innerHtml]="article.content[languageService.getSelectedLanguage()].description"></p>
+            <h3 routerLink="/articles/{{ article.id }}">{{ articleService.getArticleContentByLanguage(article.id, selectedLanguageId).title }}</h3>
+            <p [innerHtml]="articleService.getArticleContentByLanguage(article.id, selectedLanguageId).description"></p>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>  
