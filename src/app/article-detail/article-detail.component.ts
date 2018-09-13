@@ -14,7 +14,7 @@ import { ArticleService } from '../service/article.service';
 export class ArticleDetailComponent implements OnInit {
 
   article : Article;
-  selectedLanguageId : Number;
+  selectedLanguageId : number;
 
   constructor(
     private route: ActivatedRoute,
