@@ -17,6 +17,7 @@ export class ArticlesComponent implements OnInit {
   articles : Article[];
   languages: Language[];
   selectedLanguageId: number;
+  breakpoint: number;
 
   constructor(
     private storageService: LocalStorageService,
@@ -29,6 +30,23 @@ export class ArticlesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.onResponsiveItems(window.innerWidth);
+  }
+
+  onResize(event) {
+    this.onResponsiveItems(event.target.innerWidth);
+  }
+
+  onResponsiveItems(width: number) {
+    let itemsCount = 3;
+
+    if(width <= 400) {
+      itemsCount = 1
+    } else if(width >= 400 && width <= 800) {
+      itemsCount = 2
+    }
+
+    this.breakpoint = itemsCount;
   }
 
   onLanguageSelect(language : Language) {

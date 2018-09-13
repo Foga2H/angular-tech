@@ -1,3 +1,15 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css'
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 /* You can add global styles to this file, and also import other style files */
+
+.mat-form-field-underline {
+    display: none;
+}
+
+mat-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix .mat-form-field-label-wrapper {
+    display: none;
+}
+
+mat-select-value-text {
+    font-size: 19px;
+}

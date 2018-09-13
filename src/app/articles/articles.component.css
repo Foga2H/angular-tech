@@ -18,6 +18,14 @@ mat-card.article {
     height: calc(100% - 70px);
     cursor: pointer;
 }
+mat-form-field {
+    max-width: 95px;
+    margin-top: 9px;
+}
+
+mat-form-field-flex {
+    margin-top: 10px;
+}
 
 mat-card.article:hover .edit-buttons {
     display: block;
